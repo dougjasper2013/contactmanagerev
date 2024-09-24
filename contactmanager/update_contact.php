@@ -1,6 +1,8 @@
 <?php
     session_start();
 
+    $contact_id = filter_input(INPUT_POST, 'contact_id', FILTER_VALIDATE_INT);
+
     // get the data from the form
     $first_name = filter_input(INPUT_POST, 'first_name');
     $last_name = filter_input(INPUT_POST, 'last_name');
@@ -24,11 +26,14 @@
             require_once('database.php');
 
             // Add the contact to the database
-            $query = 'INSERT INTO contacts
-                (firstName, lastName, emailAddress, phone)
-                VALUES
-                (:firstName, :lastName, :emailAddress, :phone)';
+            $query = 'UPDATE contacts
+                SET firstName = :firstName,
+                lastName = :lastName,
+                emailAddress = :emailAddress,
+                phone = :phone
+                WHERE contactID = :contactID';
             $statement = $db->prepare($query);
+            $statement->bindValue(':contactID', $contact_id);
             $statement->bindValue(':firstName', $first_name);
             $statement->bindValue(':lastName', $last_name);
             $statement->bindValue(':emailAddress', $email_address);
@@ -41,7 +46,7 @@
         $_SESSION["fullName"] = $first_name . " " . $last_name;
 
         // redirect to confirmation page
-        $url = "confirmation.php";
+        $url = "update_confirmation.php";
         header("Location: " . $url);
         die();
 ?>
