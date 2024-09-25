@@ -1,5 +1,6 @@
 <?php
     session_start();
+    require_once('database.php');
 
     $contact_id = filter_input(INPUT_POST, 'contact_id', FILTER_VALIDATE_INT);
 
@@ -11,6 +12,25 @@
     
     // code to save to MySQL Database goes here
     // Validate inputs
+
+    $queryContacts = 'SELECT * FROM contacts';
+    $statement1 = $db->prepare($queryContacts);
+    $statement1->execute();
+    $contacts = $statement1->fetchAll();
+    $statement1->closeCursor();
+
+    foreach ($contacts as $contact)
+    {
+        if ($email_address == $contact["emailAddress"] && $contact_id != $contact["contactID"])
+        {
+            $_SESSION["add_error"] = "Invalid data, duplicate email address. Try again";
+
+            $url = "error.php";
+            header("Location: " . $url);
+            die();
+        }
+    }
+
     if($first_name == null || $last_name == null ||
         $email_address == null || $phone_number == null)
         {

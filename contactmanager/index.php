@@ -22,6 +22,7 @@
                     <th>Last Name</th>
                     <th>Email Address</th>
                     <th>Phone Number</th>
+                    <th>Status</th>
                     <th>&nbsp;</th> <!-- for edit button -->
                     <th>&nbsp;</th> <!-- for delete button -->
                 </tr>
@@ -31,6 +32,7 @@
                         <td><?php echo $contact['lastName']; ?></td>
                         <td><?php echo $contact['emailAddress']; ?></td>
                         <td><?php echo $contact['phone']; ?></td>
+                        <td><?php echo $contact['status']; ?></td>
                         <td>
                             <form action="update_contact_form.php"
                                 method="post">

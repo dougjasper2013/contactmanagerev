@@ -22,6 +22,10 @@
 
                     <label>Phone Number:</label>
                     <input type="text" name="phone_number" /><br />
+
+                    <label>Status:</label>
+                    <input type="radio" name="status" value="member" />Member<br />
+                    <input type="radio" name="status" value="nonmember" checked />Non-Member<br />
                 </div>
 
                 <div id="buttons">
