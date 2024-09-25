@@ -52,6 +52,10 @@
                         <?php echo ($contact['status'] == 'nonmember')
                         ? 'checked' : '' ?>
                      />Non-Member<br />
+
+                     <label>Birth Date:</label>
+                    <input type="date" name="dob"
+                        value="<?php echo $contact['dob']; ?>"/><br />
                 </div>
 
                 <div id="buttons">

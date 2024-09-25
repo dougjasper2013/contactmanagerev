@@ -8,7 +8,8 @@
     $first_name = filter_input(INPUT_POST, 'first_name');
     $last_name = filter_input(INPUT_POST, 'last_name');
     $email_address = filter_input(INPUT_POST, 'email_address');
-    $phone_number = filter_input(INPUT_POST, 'phone_number');  
+    $phone_number = filter_input(INPUT_POST, 'phone_number');
+    $dob = filter_input(INPUT_POST, 'dob');
     
     // code to save to MySQL Database goes here
     // Validate inputs
@@ -50,7 +51,8 @@
                 SET firstName = :firstName,
                 lastName = :lastName,
                 emailAddress = :emailAddress,
-                phone = :phone
+                phone = :phone,
+                dob = :dob
                 WHERE contactID = :contactID';
             $statement = $db->prepare($query);
             $statement->bindValue(':contactID', $contact_id);
@@ -58,6 +60,7 @@
             $statement->bindValue(':lastName', $last_name);
             $statement->bindValue(':emailAddress', $email_address);
             $statement->bindValue(':phone', $phone_number);
+            $statement->bindValue(':dob', $dob);
 
             $statement->execute();
             $statement->closeCursor();

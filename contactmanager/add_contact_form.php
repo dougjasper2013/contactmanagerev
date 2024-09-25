@@ -26,6 +26,9 @@
                     <label>Status:</label>
                     <input type="radio" name="status" value="member" />Member<br />
                     <input type="radio" name="status" value="nonmember" checked />Non-Member<br />
+
+                    <label>Birth Date:</label>
+                    <input type="date" name="dob" /><br />
                 </div>
 
                 <div id="buttons">
