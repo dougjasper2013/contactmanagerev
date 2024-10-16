@@ -1,9 +1,23 @@
 <?php
+    session_start();
+
+    if (!isset($_SESSION["isLoggedIn"]))
+    {
+        $_SESSION = [];        // Clear all session data
+        session_destroy();     // Clean up the session ID
+    
+        $url = "login_form.php";
+        header("Location: " . $url);
+        die();
+    }
+
     require('database.php');
     $queryContacts = 'SELECT * FROM contacts';
     $statement1 = $db->prepare($queryContacts);
     $statement1->execute();
     $contacts = $statement1->fetchAll();
+    // $contacts = array_reverse($contacts);
+    // print_r($contacts);    
     $statement1->closeCursor();
 ?>
 <!DOCTYPE html>
@@ -54,7 +68,9 @@
                     </tr>
                 <?php endforeach; ?>
             </table>
-            <p><a href="add_contact_form.php">Add Contact</a></p>
+            <p><a href="add_contact_form.php">Add Contact</a></p>            
+            
+            <p><a href="logout.php">Logout</a></p>
         </main>
         <?php include("footer.php"); ?>
     </body> 
